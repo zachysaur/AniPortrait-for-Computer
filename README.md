@@ -73,27 +73,49 @@ audio and a reference portrait image. You can also provide a video to achieve fa
 </tr>
 </table>
 
-## Installation
+# ⚒️ Installation
 
-### Build environment
+prerequisites: `3.11>=python>=3.8`, `CUDA>=11.3`, `ffmpeg` and `git`.
 
-We recommend a python version >=3.10 and cuda version =11.7. Then build environment as follows:
+Python and Git:
 
-```shell
-pip install -r requirements.txt
+- Python 3.10.11: https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe
+- git: https://git-scm.com/download/win
+
+- Install [ffmpeg](https://ffmpeg.org/) for your operating system
+  (https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/)
+  
+  notice:step 4 use windows system Set Enviroment Path.
+
+Give unrestricted script access to powershell so venv can work:
+
+- Open an administrator powershell window
+- Type `Set-ExecutionPolicy Unrestricted` and answer A
+- Close admin powershell window
+
+```
+git clone --recurse-submodules https://github.com/sdbds/AniPortrait-for-windows
 ```
 
-### Download weights
+Install with Powershell run `install.ps1` or `install-cn.ps1`(for Chinese)
 
-All the weights should be placed under the `./pretrained_weights` direcotry. You can download weights manually as follows:
+### Use local model
 
-1. Download our trained [weights](https://huggingface.co/ZJYang/AniPortrait/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth`, `motion_module.pth` and `audio2mesh.pt`.
+Add loading local safetensors or ckpt,you can change `configs/prompts/animation_facereenac.yaml` about `pretrained_base_model_path` for your local SD1.5 model.
+such as `"D:\\stablediffusion-webui\\models\\Stable-diffusion\\v1-5-pruned.ckpt"`
 
-2. Download pretrained weight of based models and other components: 
+## No need Download models manually
+~~### Download weights~~
+
+~~All the weights should be placed under the `./pretrained_weights` direcotry. You can download weights manually as follows:~~
+
+~~1. Download our trained [weights](https://huggingface.co/ZJYang/AniPortrait/tree/main), which include four parts: `denoising_unet.pth`, `reference_unet.pth`, `pose_guider.pth`, `motion_module.pth` and `audio2mesh.pt`.~~
+
+~~2. Download pretrained weight of based models and other components:
     - [StableDiffusion V1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5)
     - [sd-vae-ft-mse](https://huggingface.co/stabilityai/sd-vae-ft-mse)
     - [image_encoder](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/tree/main/image_encoder)
-    - [wav2vec2-base-960h](https://huggingface.co/facebook/wav2vec2-base-960h)
+    - [wav2vec2-base-960h](https://huggingface.co/facebook/wav2vec2-base-960h)~~
 
 Finally, these weights should be orgnized as follows:
 
