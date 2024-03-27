@@ -14,37 +14,30 @@ Write-Output "Installing dependencies..."
 pip install -U -r requirements-windows.txt
 
 Write-Output "Check Models..."
-if (!(Test-Path -Path "pretrained_models")) {
-    mkdir "pretrained_models"
+if (!(Test-Path -Path "pretrained_model")) {
+    Write-Output  "Downloading AniPortrait..."
+    huggingface-cli download --resume-download ZJYang/AniPortrait --local-dir pretrained_model
 }
 
-Set-Location .\pretrained_models
-
-if (!(Test-Path -Path "champ")) {
-    Write-Output  "Downloading champ..."
-    huggingface-cli download --resume-download bdsqlsz/Champ --local-dir champ
-}
+Set-Location .\pretrained_model
 
 if (!(Test-Path -Path "image_encoder")) {
     Write-Output  "Downloading image_encoder..."
     huggingface-cli download --resume-download bdsqlsz/image_encoder --local-dir image_encoder
 }
 
+if (!(Test-Path -Path "wav2vec2-base-960h")) {
+    Write-Output  "Downloading wav2vec2..."
+    huggingface-cli download --resume-download facebook/wav2vec2-base-960h --local-dir wav2vec2-base-960h
+}
+
 $install_SD15 = Read-Host "Do you need to download SD15? If you don't have any SD15 model locally select y, if you want to change to another SD1.5 model select n. [y/n] (Default is y)"
 if ($install_SD15 -eq "y" -or $install_SD15 -eq "Y" -or $install_SD15 -eq "") {
     if (!(Test-Path -Path "stable-diffusion-v1-5")) {
-        Write-Output  "Downloading stable-diffusion-v1-5 ..."
+        Write-Output  "Downloading stable-diffusion-v1-5..."
         huggingface-cli download --resume-download bdsqlsz/stable-diffusion-v1-5 --local-dir stable-diffusion-v1-5   
     }
 }
-
-Write-Output "Installing Video_controlnet_aux..."
-
-git submodule update --recursive --init
-
-Set-Location $PSScriptRoot/video_controlnet_aux
-pip install -r requirements.txt
-pip install -r requirements-video.txt
 
 Write-Output "Installed finish"
 Read-Host | Out-Null ;
