@@ -6,6 +6,8 @@ Huawei Wei, Zejun Yang, Zhisheng Wang
 
 Tencent Games Zhiji, Tencent
 
+![zhiji_logo](asset/zhiji_logo.png)
+
 Here we propose AniPortrait, a novel framework for generating high-quality animation driven by 
 audio and a reference portrait image. You can also provide a video to achieve face reenacment.
 
@@ -158,10 +160,12 @@ Note: If you have installed some of the pretrained models, such as `StableDiffus
 
 Here are the cli commands for running inference scripts:
 
+**Kindly note that you can set -L to the desired number of generating frames in the command, for example, -L 300.**
+
 ### Self driven
 
 ```shell
-python -m scripts.pose2vid --config ./configs/prompts/animation.yaml -W 512 -H 512 -L 64
+python -m scripts.pose2vid --config ./configs/prompts/animation.yaml -W 512 -H 512
 ```
 
 You can refer the format of animation.yaml to add your own reference images or pose videos. To convert the raw video into a pose video (keypoint sequence), you can run with the following command:
@@ -173,7 +177,7 @@ python -m scripts.vid2pose --video_path pose_video_path.mp4
 ### Face reenacment
 
 ```shell
-python -m scripts.vid2vid --config ./configs/prompts/animation_facereenac.yaml -W 512 -H 512 -L 64
+python -m scripts.vid2vid --config ./configs/prompts/animation_facereenac.yaml -W 512 -H 512
 ```
 
 Add source face videos and reference images in the animation_facereenac.yaml.
@@ -181,7 +185,7 @@ Add source face videos and reference images in the animation_facereenac.yaml.
 ### Audio driven
 
 ```shell
-python -m scripts.audio2vid --config ./configs/prompts/animation_audio.yaml -W 512 -H 512 -L 64
+python -m scripts.audio2vid --config ./configs/prompts/animation_audio.yaml -W 512 -H 512
 ```
 
 Add audios and reference images in the animation_audio.yaml.
@@ -237,7 +241,7 @@ accelerate launch train_stage_2.py --config ./configs/train/stage2.yaml
 
 ## Acknowledgements
 
-We first thank the authors of [EMO](https://github.com/HumanAIGC/EMO). Additionally, we would like to thank the contributors to the [Moore-AnimateAnyone](https://github.com/MooreThreads/Moore-AnimateAnyone), [majic-animate](https://github.com/magic-research/magic-animate), [animatediff](https://github.com/guoyww/AnimateDiff) and [Open-AnimateAnyone](https://github.com/guoqincode/Open-AnimateAnyone) repositories, for their open research and exploration.
+We first thank the authors of [EMO](https://github.com/HumanAIGC/EMO), and part of the images and audios in our demos are from EMO. Additionally, we would like to thank the contributors to the [Moore-AnimateAnyone](https://github.com/MooreThreads/Moore-AnimateAnyone), [majic-animate](https://github.com/magic-research/magic-animate), [animatediff](https://github.com/guoyww/AnimateDiff) and [Open-AnimateAnyone](https://github.com/guoqincode/Open-AnimateAnyone) repositories, for their open research and exploration.
 
 ## Citation
 
